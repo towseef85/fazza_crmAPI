@@ -1,0 +1,12 @@
+D:\Projects_22-23\Fazza_CRM\CRM\CRM.Contracts\bin\Debug\net6.0\CRM.Contracts.deps.json
+D:\Projects_22-23\Fazza_CRM\CRM\CRM.Contracts\bin\Debug\net6.0\CRM.Contracts.dll
+D:\Projects_22-23\Fazza_CRM\CRM\CRM.Contracts\bin\Debug\net6.0\CRM.Contracts.pdb
+D:\Projects_22-23\Fazza_CRM\CRM\CRM.Contracts\obj\Debug\net6.0\CRM.Contracts.csproj.AssemblyReference.cache
+D:\Projects_22-23\Fazza_CRM\CRM\CRM.Contracts\obj\Debug\net6.0\CRM.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects_22-23\Fazza_CRM\CRM\CRM.Contracts\obj\Debug\net6.0\CRM.Contracts.AssemblyInfoInputs.cache
+D:\Projects_22-23\Fazza_CRM\CRM\CRM.Contracts\obj\Debug\net6.0\CRM.Contracts.AssemblyInfo.cs
+D:\Projects_22-23\Fazza_CRM\CRM\CRM.Contracts\obj\Debug\net6.0\CRM.Contracts.csproj.CoreCompileInputs.cache
+D:\Projects_22-23\Fazza_CRM\CRM\CRM.Contracts\obj\Debug\net6.0\CRM.Contracts.dll
+D:\Projects_22-23\Fazza_CRM\CRM\CRM.Contracts\obj\Debug\net6.0\refint\CRM.Contracts.dll
+D:\Projects_22-23\Fazza_CRM\CRM\CRM.Contracts\obj\Debug\net6.0\CRM.Contracts.pdb
+D:\Projects_22-23\Fazza_CRM\CRM\CRM.Contracts\obj\Debug\net6.0\ref\CRM.Contracts.dll
