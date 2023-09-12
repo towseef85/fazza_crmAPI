@@ -1,4 +1,8 @@
 ﻿using AutoMapper;
+using Domain.Drivers;
+using Domain.Vendors;
+using Infrastructure.Dtos.DriverDto;
+using Infrastructure.Dtos.VendorDto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +15,11 @@ namespace Infrastructure.Providers
     {
         public MappingProfiles()
         {
-                
+            CreateMap<VendorDto, Vendor>();
+            CreateMap<Vendor, GetVendorDto>();
+
+            CreateMap<DriverDto, Driver>();
+            CreateMap<Driver, GetDriverDto>();
         }
     }
 }

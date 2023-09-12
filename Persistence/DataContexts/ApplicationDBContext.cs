@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore;
 using Domain.Common;
 using System.Data;
+using Domain.Drivers;
+using Domain.Vendors;
 
 namespace Persistence.DataContexts
 {
@@ -13,10 +15,11 @@ namespace Persistence.DataContexts
 
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
-           
-        }
 
-        
+        }
+        public DbSet<Driver> Drivers { get; set; }
+        public DbSet<Vendor> Vendors { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.EnableDetailedErrors();

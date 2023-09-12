@@ -17,3 +17,22 @@ C:\Users\Towseef\Documents\Testing\Fazza_crm\Application\obj\Debug\net6.0\Applic
 C:\Users\Towseef\Documents\Testing\Fazza_crm\Application\obj\Debug\net6.0\refint\Application.dll
 C:\Users\Towseef\Documents\Testing\Fazza_crm\Application\obj\Debug\net6.0\Application.pdb
 C:\Users\Towseef\Documents\Testing\Fazza_crm\Application\obj\Debug\net6.0\ref\Application.dll
+D:\Fazza CRM\fazza_crmAPI\Application\bin\Debug\net6.0\Application.deps.json
+D:\Fazza CRM\fazza_crmAPI\Application\bin\Debug\net6.0\Application.dll
+D:\Fazza CRM\fazza_crmAPI\Application\bin\Debug\net6.0\Application.pdb
+D:\Fazza CRM\fazza_crmAPI\Application\bin\Debug\net6.0\Domain.dll
+D:\Fazza CRM\fazza_crmAPI\Application\bin\Debug\net6.0\Infrastructure.dll
+D:\Fazza CRM\fazza_crmAPI\Application\bin\Debug\net6.0\Persistence.dll
+D:\Fazza CRM\fazza_crmAPI\Application\bin\Debug\net6.0\Domain.pdb
+D:\Fazza CRM\fazza_crmAPI\Application\bin\Debug\net6.0\Infrastructure.pdb
+D:\Fazza CRM\fazza_crmAPI\Application\bin\Debug\net6.0\Persistence.pdb
+D:\Fazza CRM\fazza_crmAPI\Application\obj\Debug\net6.0\Application.csproj.AssemblyReference.cache
+D:\Fazza CRM\fazza_crmAPI\Application\obj\Debug\net6.0\Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\Fazza CRM\fazza_crmAPI\Application\obj\Debug\net6.0\Application.AssemblyInfoInputs.cache
+D:\Fazza CRM\fazza_crmAPI\Application\obj\Debug\net6.0\Application.AssemblyInfo.cs
+D:\Fazza CRM\fazza_crmAPI\Application\obj\Debug\net6.0\Application.csproj.CoreCompileInputs.cache
+D:\Fazza CRM\fazza_crmAPI\Application\obj\Debug\net6.0\Application.csproj.CopyComplete
+D:\Fazza CRM\fazza_crmAPI\Application\obj\Debug\net6.0\Application.dll
+D:\Fazza CRM\fazza_crmAPI\Application\obj\Debug\net6.0\refint\Application.dll
+D:\Fazza CRM\fazza_crmAPI\Application\obj\Debug\net6.0\Application.pdb
+D:\Fazza CRM\fazza_crmAPI\Application\obj\Debug\net6.0\ref\Application.dll

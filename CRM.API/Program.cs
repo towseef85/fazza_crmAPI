@@ -1,4 +1,6 @@
 using Application;
+using Application.Driver;
+using FluentValidation.AspNetCore;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -35,10 +37,10 @@ builder.Services.AddCors(opt =>
 });
 
 
-//builder.Services.AddControllers().AddFluentValidation(config =>
-//{
-//    config.RegisterValidatorsFromAssemblyContaining<Create>();
-//});
+builder.Services.AddControllers().AddFluentValidation(config =>
+{
+    config.RegisterValidatorsFromAssemblyContaining<Create>();
+});
 
 
 var app = builder.Build();

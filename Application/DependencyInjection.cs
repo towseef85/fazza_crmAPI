@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Application.Driver;
+using Application.DriverBL;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +14,8 @@ namespace Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            //services.AddMediatR(typeof(Create.Command).Assembly);
-            //services.AddMediatR(typeof(List.Query).Assembly);
+            services.AddMediatR(typeof(Create.Command).Assembly);
+            services.AddMediatR(typeof(List.Query).Assembly);
 
             return services;
         }
