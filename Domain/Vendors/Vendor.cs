@@ -18,5 +18,6 @@ namespace Domain.Vendors
         public string? LocationUrl { get; set; }
         public string LeadSource { get; set; }
         public string PickupAddress { get; set; }
+        public bool IsTrailDone { get; set;}
     }
 }

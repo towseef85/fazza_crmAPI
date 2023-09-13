@@ -5,6 +5,8 @@ using Domain.Common;
 using System.Data;
 using Domain.Drivers;
 using Domain.Vendors;
+using Domain.Prices;
+using Domain.VendorPrices;
 
 namespace Persistence.DataContexts
 {
@@ -19,6 +21,8 @@ namespace Persistence.DataContexts
         }
         public DbSet<Driver> Drivers { get; set; }
         public DbSet<Vendor> Vendors { get; set; }
+        public DbSet<Price> Prices { get; set; }
+        public DbSet<VendorPrice> VendorPrices { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -176,7 +176,6 @@ D:\Fazza CRM\fazza_crmAPI\CRM.API\obj\Debug\net6.0\CRM.API.GeneratedMSBuildEdito
 D:\Fazza CRM\fazza_crmAPI\CRM.API\obj\Debug\net6.0\CRM.API.AssemblyInfoInputs.cache
 D:\Fazza CRM\fazza_crmAPI\CRM.API\obj\Debug\net6.0\CRM.API.AssemblyInfo.cs
 D:\Fazza CRM\fazza_crmAPI\CRM.API\obj\Debug\net6.0\CRM.API.csproj.CoreCompileInputs.cache
-D:\Fazza CRM\fazza_crmAPI\CRM.API\obj\Debug\net6.0\CRM.API.MvcApplicationPartsAssemblyInfo.cs
 D:\Fazza CRM\fazza_crmAPI\CRM.API\obj\Debug\net6.0\CRM.API.MvcApplicationPartsAssemblyInfo.cache
 D:\Fazza CRM\fazza_crmAPI\CRM.API\obj\Debug\net6.0\staticwebassets\msbuild.CRM.API.Microsoft.AspNetCore.StaticWebAssets.props
 D:\Fazza CRM\fazza_crmAPI\CRM.API\obj\Debug\net6.0\staticwebassets\msbuild.build.CRM.API.props
@@ -192,3 +191,4 @@ D:\Fazza CRM\fazza_crmAPI\CRM.API\obj\Debug\net6.0\refint\CRM.API.dll
 D:\Fazza CRM\fazza_crmAPI\CRM.API\obj\Debug\net6.0\CRM.API.pdb
 D:\Fazza CRM\fazza_crmAPI\CRM.API\obj\Debug\net6.0\CRM.API.genruntimeconfig.cache
 D:\Fazza CRM\fazza_crmAPI\CRM.API\obj\Debug\net6.0\ref\CRM.API.dll
+D:\Fazza CRM\fazza_crmAPI\CRM.API\obj\Debug\net6.0\CRM.API.MvcApplicationPartsAssemblyInfo.cs
