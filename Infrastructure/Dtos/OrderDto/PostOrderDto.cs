@@ -11,14 +11,11 @@ namespace Infrastructure.Dtos.OrderDto
 {
     public class PostOrderDto
     {
-       public Guid Id { get; set; }
+        public Guid Id { get; set; }
         public Guid VendorId { get; set; }
-        public Vendor Vendor { get; set; }
         public Guid PriceId { get; set; }
-        public Price Price { get; set; }
         public string COD { get; set; }
         public string CODStatus { get; set; }
         public Guid DriverId { get; set; }
-        public Driver Driver { get; set; }
     }
 }
