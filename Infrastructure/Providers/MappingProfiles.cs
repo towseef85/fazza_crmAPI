@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Domain.Drivers;
 using Domain.Prices;
-using Domain.VendorPrices;
 using Domain.Vendors;
 using Infrastructure.Dtos.DriverDto;
 using Infrastructure.Dtos.PriceDto;
@@ -19,16 +18,19 @@ namespace Infrastructure.Providers
     {
         public MappingProfiles()
         {
-            CreateMap<VendorPriceDto, VendorPrice>();
+            //CreateMap<PostVendorPriceDto, VendorPrice>();
+            //CreateMap<VendorPrice, GetVendorPriceDto>();
+
+            CreateMap<PostVendorPriceDto, VendorPrice>();
             CreateMap<VendorPrice, GetVendorPriceDto>();
 
-            CreateMap<PriceDto, Price>();
+            CreateMap<PostPriceDto, Price>();
             CreateMap<Price, GetPriceDto>();
 
-            CreateMap<VendorDto, Vendor>();
+            CreateMap<PostVendorDto, Vendor>();
             CreateMap<Vendor, GetVendorDto>();
 
-            CreateMap<DriverDto, Driver>();
+            CreateMap<PostDriverDto, Driver>();
             CreateMap<Driver, GetDriverDto>();
         }
     }

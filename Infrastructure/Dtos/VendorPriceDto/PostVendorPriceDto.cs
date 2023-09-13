@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Dtos.VendorPriceDto
 {
-    public class VendorPriceDto
+    public class PostVendorPriceDto
     {
-       public Guid Id { get; set; }
+        public Guid Id { get; set; }
         public Guid VendorId { get; set; }
         public Guid PriceId { get; set; }
+
     }
 }

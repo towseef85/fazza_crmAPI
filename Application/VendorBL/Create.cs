@@ -15,9 +15,9 @@ namespace Application.VendorBL
 {
     public class Create
     {
-        public class Command : IRequest<ServiceStatus<VendorDto>>
+        public class Command : IRequest<ServiceStatus<PostVendorDto>>
         {
-            public VendorDto Vendor { get; set; }
+            public PostVendorDto Vendor { get; set; }
         }
         public class CommandValidator : AbstractValidator<Command>
         {
@@ -26,7 +26,7 @@ namespace Application.VendorBL
                 RuleFor(x => x.Vendor).SetValidator(new VendorValidation());
             }
         }
-        public class Handler : IRequestHandler<Command, ServiceStatus<VendorDto>>
+        public class Handler : IRequestHandler<Command, ServiceStatus<PostVendorDto>>
         {
             private readonly ApplicationDbContext _context;
             private readonly IMapper _mapper;
@@ -36,14 +36,14 @@ namespace Application.VendorBL
                 _context = context;
                 _mapper = mapper;
             }
-            public async Task<ServiceStatus<VendorDto>> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<ServiceStatus<PostVendorDto>> Handle(Command request, CancellationToken cancellationToken)
             {
                 try
                 {
                     request.Vendor.Id = Guid.NewGuid();
                     _context.Vendors.Add(_mapper.Map<Domain.Vendors.Vendor>(request.Vendor));
                     var result = await _context.SaveChangesAsync(cancellationToken) > 0;
-                    return new ServiceStatus<VendorDto>
+                    return new ServiceStatus<PostVendorDto>
                     {
                         Code = System.Net.HttpStatusCode.OK,
                         Message = $"Vendor Added Successfully!",
@@ -54,7 +54,7 @@ namespace Application.VendorBL
                 {
                     Exception exception = ex;
 
-                    return new ServiceStatus<VendorDto>
+                    return new ServiceStatus<PostVendorDto>
                     {
                         Code = System.Net.HttpStatusCode.InternalServerError,
                         Message = ex.Message.ToString(),

@@ -6,7 +6,7 @@ using System.Data;
 using Domain.Drivers;
 using Domain.Vendors;
 using Domain.Prices;
-using Domain.VendorPrices;
+using Domain.Orders;
 
 namespace Persistence.DataContexts
 {
@@ -15,14 +15,17 @@ namespace Persistence.DataContexts
 
         private IDbContextTransaction _currentTransaction;
 
-        public ApplicationDbContext(DbContextOptions options) : base(options)
-        {
-
-        }
+        public DbSet<Order> Orders { get; set; }
         public DbSet<Driver> Drivers { get; set; }
         public DbSet<Vendor> Vendors { get; set; }
         public DbSet<Price> Prices { get; set; }
         public DbSet<VendorPrice> VendorPrices { get; set; }
+
+        public ApplicationDbContext(DbContextOptions options) : base(options)
+        {
+
+        }
+ 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -60,6 +63,38 @@ namespace Persistence.DataContexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<VendorPrice>()
+            .HasKey(vp => new { vp.VendorId, vp.PriceId });
+
+            modelBuilder.Entity<VendorPrice>()
+                .HasOne(vp => vp.Vendors)
+                .WithMany(v => v.VendorPrices)
+                .HasForeignKey(vp => vp.VendorId);
+
+            modelBuilder.Entity<VendorPrice>()
+                .HasOne(vp => vp.Prices)
+                .WithMany(p => p.VendorPrices)
+                .HasForeignKey(vp => vp.PriceId);
+//-----------
+
+            modelBuilder.Entity<Order>()
+          .HasKey(vp => new { vp.VendorId, vp.PriceId,vp.DriverId });
+
+            modelBuilder.Entity<Order>()
+                .HasOne(vp => vp.Vendor)
+                .WithMany(v => v.Orders)
+                .HasForeignKey(vp => vp.VendorId);
+
+            modelBuilder.Entity<Order>()
+                .HasOne(vp => vp.Price)
+                .WithMany(p => p.Orders)
+                .HasForeignKey(vp => vp.PriceId);
+
+            modelBuilder.Entity<Order>()
+              .HasOne(vp => vp.Driver)
+              .WithMany(p => p.Orders)
+              .HasForeignKey(vp => vp.DriverId);
+
             base.OnModelCreating(modelBuilder);
         }
 

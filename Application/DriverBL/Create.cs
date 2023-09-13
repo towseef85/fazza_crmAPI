@@ -15,9 +15,9 @@ namespace Application.Driver
 {
     public class Create
     {
-        public class Command : IRequest<ServiceStatus<DriverDto>>
+        public class Command : IRequest<ServiceStatus<PostDriverDto>>
         {
-            public DriverDto Driver { get; set; }
+            public PostDriverDto Driver { get; set; }
         }
 
         public class CommandValidator : AbstractValidator<Command>
@@ -28,7 +28,7 @@ namespace Application.Driver
             }
         }
 
-        public class Handler : IRequestHandler<Command, ServiceStatus<DriverDto>>
+        public class Handler : IRequestHandler<Command, ServiceStatus<PostDriverDto>>
         {
             private readonly ApplicationDbContext _context;
             private readonly IMapper _mapper;
@@ -39,14 +39,14 @@ namespace Application.Driver
                 _mapper = mapper;
 
             }
-            public async Task<ServiceStatus<DriverDto>> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<ServiceStatus<PostDriverDto>> Handle(Command request, CancellationToken cancellationToken)
             {
                 try
                 {
                     request.Driver.Id = Guid.NewGuid();
                     _context.Drivers.Add(_mapper.Map<Domain.Drivers.Driver>(request.Driver));
                     var result = await _context.SaveChangesAsync(cancellationToken) > 0;
-                    return new ServiceStatus<DriverDto>
+                    return new ServiceStatus<PostDriverDto>
                     {
                         Code = System.Net.HttpStatusCode.OK,
                         Message = $"Driver Added Successfully!",
@@ -57,7 +57,7 @@ namespace Application.Driver
                 {
                     Exception exception = ex;
 
-                    return new ServiceStatus<DriverDto>
+                    return new ServiceStatus<PostDriverDto>
                     {
                         Code = System.Net.HttpStatusCode.InternalServerError,
                         Message = ex.Message.ToString(),

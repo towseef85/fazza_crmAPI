@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Dtos.DriverDto
 {
-    public class DriverDto
+    public class PostDriverDto
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

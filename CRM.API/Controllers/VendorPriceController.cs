@@ -26,18 +26,18 @@ namespace CRM.API.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(VendorPriceDto))]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(PostVendorPriceDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Create(VendorPriceDto vendorPrice)
+        public async Task<IActionResult> Create(PostVendorPriceDto vendorPrice)
         {
             return HandleResult(await Mediator.Send(new Create.Command { VendorPrice = vendorPrice }));
         }
 
         [HttpPut]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(VendorPriceDto))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PostVendorPriceDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Update(VendorPriceDto vendorPrice)
+        public async Task<IActionResult> Update(PostVendorPriceDto vendorPrice)
         {
             return HandleResult(await Mediator.Send(new Update.Command { VendorPrice = vendorPrice }));
         }

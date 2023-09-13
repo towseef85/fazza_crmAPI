@@ -1,4 +1,5 @@
 ﻿using Domain.Common;
+using Domain.Orders;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -19,5 +20,8 @@ namespace Domain.Vendors
         public string LeadSource { get; set; }
         public string PickupAddress { get; set; }
         public bool IsTrailDone { get; set;}
+
+        public ICollection<VendorPrice> VendorPrices { get; set; }
+        public ICollection<Order> Orders { get; set; }
     }
 }

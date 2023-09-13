@@ -27,18 +27,18 @@ namespace CRM.API.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(DriverDto))]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(PostDriverDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Create(DriverDto driver)
+        public async Task<IActionResult> Create(PostDriverDto driver)
         {
             return HandleResult(await Mediator.Send(new Create.Command { Driver = driver }));
         }
 
         [HttpPut]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DriverDto))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PostDriverDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Update(DriverDto driver)
+        public async Task<IActionResult> Update(PostDriverDto driver)
         {
             return HandleResult(await Mediator.Send(new Update.Command { Driver = driver }));
         }

@@ -14,9 +14,9 @@ namespace Application.DriverBL
 {
     public class Update
     {
-        public class Command : IRequest<ServiceStatus<DriverDto>>
+        public class Command : IRequest<ServiceStatus<PostDriverDto>>
         {
-            public DriverDto Driver { get; set; }
+            public PostDriverDto Driver { get; set; }
         }
         public class CommandValidator : AbstractValidator<Command>
         {
@@ -25,7 +25,7 @@ namespace Application.DriverBL
                 RuleFor(x => x.Driver).SetValidator(new DriverValidation());
             }
         }
-        public class Handler : IRequestHandler<Command, ServiceStatus<DriverDto>>
+        public class Handler : IRequestHandler<Command, ServiceStatus<PostDriverDto>>
         {
             private readonly ApplicationDbContext _context;
             private readonly IMapper _mapper;
@@ -36,7 +36,7 @@ namespace Application.DriverBL
                 _mapper = mapper;
 
             }
-            public async Task<ServiceStatus<DriverDto>> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<ServiceStatus<PostDriverDto>> Handle(Command request, CancellationToken cancellationToken)
             {
                 try
                 {
@@ -45,14 +45,14 @@ namespace Application.DriverBL
                     {
                         _mapper.Map(request.Driver, res);
                         var result = await _context.SaveChangesAsync(cancellationToken) > 0;
-                        return new ServiceStatus<DriverDto>
+                        return new ServiceStatus<PostDriverDto>
                         {
                             Code = System.Net.HttpStatusCode.OK,
                             Message = $"Driver Updated Successfully!",
                             Object = request.Driver
                         };
                     }
-                    return new ServiceStatus<DriverDto>
+                    return new ServiceStatus<PostDriverDto>
                     {
                         Code = System.Net.HttpStatusCode.NotFound,
                         Message = $"Id Not Found!",
@@ -63,7 +63,7 @@ namespace Application.DriverBL
                 {
                     Exception exception = ex;
 
-                    return new ServiceStatus<DriverDto>
+                    return new ServiceStatus<PostDriverDto>
                     {
                         Code = System.Net.HttpStatusCode.InternalServerError,
                         Message = ex.Message.ToString(),

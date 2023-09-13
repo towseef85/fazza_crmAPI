@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Domain.Vendors;
 using FluentValidation;
 using Infrastructure.Dtos.VendorPriceDto;
 using Infrastructure.Providers;
@@ -14,9 +15,9 @@ namespace Application.VendorPricesBL
 {
     public class Create
     {
-        public class Command : IRequest<ServiceStatus<VendorPriceDto>>
+        public class Command : IRequest<ServiceStatus<PostVendorPriceDto>>
         {
-            public VendorPriceDto VendorPrice { get; set; }
+            public PostVendorPriceDto VendorPrice { get; set; }
         }
         public class CommandValidator : AbstractValidator<Command>
         {
@@ -26,7 +27,7 @@ namespace Application.VendorPricesBL
             }
         }
 
-        public class Handler : IRequestHandler<Command, ServiceStatus<VendorPriceDto>>
+        public class Handler : IRequestHandler<Command, ServiceStatus<PostVendorPriceDto>>
         {
             private readonly ApplicationDbContext _context;
             private readonly IMapper _mapper;
@@ -37,14 +38,14 @@ namespace Application.VendorPricesBL
                 _context = context;
                 _mapper = mapper;
             }
-            public async Task<ServiceStatus<VendorPriceDto>> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<ServiceStatus<PostVendorPriceDto>> Handle(Command request, CancellationToken cancellationToken)
             {
                 try
                 {
                     request.VendorPrice.Id = Guid.NewGuid();
-                    _context.VendorPrices.Add(_mapper.Map<Domain.VendorPrices.VendorPrice>(request.VendorPrice));
+                    _context.VendorPrices.Add(_mapper.Map<VendorPrice>(request.VendorPrice));
                     var result = await _context.SaveChangesAsync(cancellationToken) > 0;
-                    return new ServiceStatus<VendorPriceDto>
+                    return new ServiceStatus<PostVendorPriceDto>
                     {
                         Code = System.Net.HttpStatusCode.OK,
                         Message = $"Vendor Price Added Successfully!",
@@ -55,7 +56,7 @@ namespace Application.VendorPricesBL
                 {
                     Exception exception = ex;
 
-                    return new ServiceStatus<VendorPriceDto>
+                    return new ServiceStatus<PostVendorPriceDto>
                     {
                         Code = System.Net.HttpStatusCode.InternalServerError,
                         Message = ex.Message.ToString(),

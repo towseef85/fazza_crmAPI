@@ -14,9 +14,9 @@ namespace Application.VendorPricesBL
 {
     public class Update
     {
-        public class Command : IRequest<ServiceStatus<VendorPriceDto>>
+        public class Command : IRequest<ServiceStatus<PostVendorPriceDto>>
         {
-            public VendorPriceDto VendorPrice { get; set; }
+            public PostVendorPriceDto VendorPrice { get; set; }
         }
         public class CommandValidator : AbstractValidator<Command>
         {
@@ -25,7 +25,7 @@ namespace Application.VendorPricesBL
                 RuleFor(x => x.VendorPrice).SetValidator(new VendorPriceValidation());
             }
         }
-        public class Handler : IRequestHandler<Command, ServiceStatus<VendorPriceDto>>
+        public class Handler : IRequestHandler<Command, ServiceStatus<PostVendorPriceDto>>
         {
             private readonly ApplicationDbContext _context;
             private readonly IMapper _mapper;
@@ -36,7 +36,7 @@ namespace Application.VendorPricesBL
                 _mapper = mapper;
 
             }
-            public async Task<ServiceStatus<VendorPriceDto>> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<ServiceStatus<PostVendorPriceDto>> Handle(Command request, CancellationToken cancellationToken)
             {
                 try
                 {
@@ -45,14 +45,14 @@ namespace Application.VendorPricesBL
                     {
                         _mapper.Map(request.VendorPrice, res);
                         var result = await _context.SaveChangesAsync(cancellationToken) > 0;
-                        return new ServiceStatus<VendorPriceDto>
+                        return new ServiceStatus<PostVendorPriceDto>
                         {
                             Code = System.Net.HttpStatusCode.OK,
                             Message = $"Vendor Price Updated Successfully!",
                             Object = request.VendorPrice
                         };
                     }
-                    return new ServiceStatus<VendorPriceDto>
+                    return new ServiceStatus<PostVendorPriceDto>
                     {
                         Code = System.Net.HttpStatusCode.NotFound,
                         Message = $"Id Not Found!",
@@ -63,7 +63,7 @@ namespace Application.VendorPricesBL
                 {
                     Exception exception = ex;
 
-                    return new ServiceStatus<VendorPriceDto>
+                    return new ServiceStatus<PostVendorPriceDto>
                     {
                         Code = System.Net.HttpStatusCode.InternalServerError,
                         Message = ex.Message.ToString(),

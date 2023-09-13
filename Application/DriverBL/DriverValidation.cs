@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.DriverBL
 {
-    public class DriverValidation : AbstractValidator<DriverDto>
+    public class DriverValidation : AbstractValidator<PostDriverDto>
     {
         public DriverValidation()
         {

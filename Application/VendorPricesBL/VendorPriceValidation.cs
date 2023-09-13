@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.VendorPricesBL
 {
-    public class VendorPriceValidation:AbstractValidator<VendorPriceDto>
+    public class VendorPriceValidation:AbstractValidator<PostVendorPriceDto>
     {
         public VendorPriceValidation() {
 

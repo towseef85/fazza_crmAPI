@@ -15,9 +15,9 @@ namespace Application.PriceBL
 {
     public class Update
     {
-        public class Command : IRequest<ServiceStatus<PriceDto>>
+        public class Command : IRequest<ServiceStatus<PostPriceDto>>
         {
-            public PriceDto Price { get; set; }
+            public PostPriceDto Price { get; set; }
         }
         public class CommandValidator : AbstractValidator<Command>
         {
@@ -26,7 +26,7 @@ namespace Application.PriceBL
                 RuleFor(x => x.Price).SetValidator(new PriceValidation());
             }
         }
-        public class Handler : IRequestHandler<Command, ServiceStatus<PriceDto>>
+        public class Handler : IRequestHandler<Command, ServiceStatus<PostPriceDto>>
         {
             private readonly ApplicationDbContext _context;
             private readonly IMapper _mapper;
@@ -37,7 +37,7 @@ namespace Application.PriceBL
                 _mapper = mapper;
 
             }
-            public async Task<ServiceStatus<PriceDto>> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<ServiceStatus<PostPriceDto>> Handle(Command request, CancellationToken cancellationToken)
             {
                 try
                 {
@@ -46,14 +46,14 @@ namespace Application.PriceBL
                     {
                         _mapper.Map(request.Price, res);
                         var result = await _context.SaveChangesAsync(cancellationToken) > 0;
-                        return new ServiceStatus<PriceDto>
+                        return new ServiceStatus<PostPriceDto>
                         {
                             Code = System.Net.HttpStatusCode.OK,
                             Message = $"Price Updated Successfully!",
                             Object = request.Price
                         };
                     }
-                    return new ServiceStatus<PriceDto>
+                    return new ServiceStatus<PostPriceDto>
                     {
                         Code = System.Net.HttpStatusCode.NotFound,
                         Message = $"Id Not Found!",
@@ -64,7 +64,7 @@ namespace Application.PriceBL
                 {
                     Exception exception = ex;
 
-                    return new ServiceStatus<PriceDto>
+                    return new ServiceStatus<PostPriceDto>
                     {
                         Code = System.Net.HttpStatusCode.InternalServerError,
                         Message = ex.Message.ToString(),

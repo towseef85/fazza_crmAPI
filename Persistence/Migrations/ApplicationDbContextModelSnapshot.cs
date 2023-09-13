@@ -61,6 +61,52 @@ namespace Persistence.Migrations
                     b.ToTable("Drivers");
                 });
 
+            modelBuilder.Entity("Domain.Orders.Order", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("COD")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CODStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeleteDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("DriverId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PriceId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("VendorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DriverId");
+
+                    b.HasIndex("PriceId");
+
+                    b.HasIndex("VendorId");
+
+                    b.ToTable("Orders");
+                });
+
             modelBuilder.Entity("Domain.Prices.Price", b =>
                 {
                     b.Property<Guid>("Id")
@@ -91,35 +137,6 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Prices");
-                });
-
-            modelBuilder.Entity("Domain.VendorPrices.VendorPrice", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeleteDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid>("PriceId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("VendorId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("VendorPrices");
                 });
 
             modelBuilder.Entity("Domain.Vendors.Vendor", b =>
@@ -176,6 +193,101 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Vendors");
+                });
+
+            modelBuilder.Entity("Domain.Vendors.VendorPrice", b =>
+                {
+                    b.Property<Guid>("VendorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PriceId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeleteDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("VendorId", "PriceId");
+
+                    b.HasIndex("PriceId");
+
+                    b.ToTable("VendorPrices");
+                });
+
+            modelBuilder.Entity("Domain.Orders.Order", b =>
+                {
+                    b.HasOne("Domain.Drivers.Driver", "Driver")
+                        .WithMany("Orders")
+                        .HasForeignKey("DriverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Prices.Price", "Price")
+                        .WithMany("Orders")
+                        .HasForeignKey("PriceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Vendors.Vendor", "Vendor")
+                        .WithMany("Orders")
+                        .HasForeignKey("VendorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Driver");
+
+                    b.Navigation("Price");
+
+                    b.Navigation("Vendor");
+                });
+
+            modelBuilder.Entity("Domain.Vendors.VendorPrice", b =>
+                {
+                    b.HasOne("Domain.Prices.Price", "Prices")
+                        .WithMany("VendorPrices")
+                        .HasForeignKey("PriceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Vendors.Vendor", "Vendors")
+                        .WithMany("VendorPrices")
+                        .HasForeignKey("VendorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Prices");
+
+                    b.Navigation("Vendors");
+                });
+
+            modelBuilder.Entity("Domain.Drivers.Driver", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("Domain.Prices.Price", b =>
+                {
+                    b.Navigation("Orders");
+
+                    b.Navigation("VendorPrices");
+                });
+
+            modelBuilder.Entity("Domain.Vendors.Vendor", b =>
+                {
+                    b.Navigation("Orders");
+
+                    b.Navigation("VendorPrices");
                 });
 #pragma warning restore 612, 618
         }
