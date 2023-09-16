@@ -22,7 +22,7 @@ namespace Domain.Orders
         public string? TypePayment { get; set; }
         public string? Remarks { get; set; }
 
-        public virtual Vendors Vendors { get; set; }
+        public virtual Vendor Vendors { get; set; }
         public virtual Driver Drivers { get; set; }
         public virtual Price Prices { get; set; }
     }
