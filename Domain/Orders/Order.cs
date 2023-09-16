@@ -10,15 +10,20 @@ using System.Threading.Tasks;
 
 namespace Domain.Orders
 {
-    public class Order:BaseEntity
+    public class Order : BaseEntity
     {
+
         public Guid VendorId { get; set; }
-        public Vendor Vendor { get; set; }
         public Guid PriceId { get; set; }
-        public Price Price { get; set; }
-        public string COD { get; set; }
-        public string CODStatus { get; set; }
+        public string? COD { get; set; }
+        public string? CODStatus { get; set; }
         public Guid DriverId { get; set; }
-        public Driver Driver { get; set; }
+        public DateTime? RecevingDate { get; set; }
+        public string? TypePayment { get; set; }
+        public string? Remarks { get; set; }
+
+        public virtual Vendors Vendors { get; set; }
+        public virtual Driver Drivers { get; set; }
+        public virtual Price Prices { get; set; }
     }
 }

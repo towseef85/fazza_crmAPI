@@ -10,15 +10,17 @@ using System.Threading.Tasks;
 
 namespace Application.OrderBL
 {
-    public class OrderValidation:AbstractValidator<PostOrderDto>
+    public class OrderValidation : AbstractValidator<PostOrderDto>
     {
-        public OrderValidation() { 
-        
-            RuleFor(x=>x.VendorId).NotEmpty();
+        public OrderValidation()
+        {
+
+            RuleFor(x => x.VendorId).NotEmpty();
             RuleFor(x => x.PriceId).NotEmpty();
             RuleFor(x => x.COD).NotEmpty();
             RuleFor(x => x.CODStatus).NotEmpty();
             RuleFor(x => x.DriverId).NotEmpty();
+            RuleFor(x => x.TypePayment).NotEmpty();
 
         }
     }

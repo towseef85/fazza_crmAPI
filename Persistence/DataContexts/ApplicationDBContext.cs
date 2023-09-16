@@ -78,22 +78,22 @@ namespace Persistence.DataContexts
 //-----------
 
             modelBuilder.Entity<Order>()
-          .HasKey(vp => new { vp.VendorId, vp.PriceId,vp.DriverId });
+          .HasKey(x => new { x.VendorId, x.PriceId,x.DriverId });
 
             modelBuilder.Entity<Order>()
-                .HasOne(vp => vp.Vendor)
-                .WithMany(v => v.Orders)
-                .HasForeignKey(vp => vp.VendorId);
+                .HasOne(x => x.Vendors)
+                .WithMany(x => x.Orders)
+                .HasForeignKey(x => x.VendorId);
 
             modelBuilder.Entity<Order>()
-                .HasOne(vp => vp.Price)
-                .WithMany(p => p.Orders)
-                .HasForeignKey(vp => vp.PriceId);
+                .HasOne(x => x.Prices)
+                .WithMany(x => x.Orders)
+                .HasForeignKey(x => x.PriceId);
 
             modelBuilder.Entity<Order>()
-              .HasOne(vp => vp.Driver)
-              .WithMany(p => p.Orders)
-              .HasForeignKey(vp => vp.DriverId);
+              .HasOne(x => x.Drivers)
+              .WithMany(x => x.Orders)
+              .HasForeignKey(x => x.DriverId);
 
             base.OnModelCreating(modelBuilder);
         }

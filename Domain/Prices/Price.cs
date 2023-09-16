@@ -16,6 +16,6 @@ namespace Domain.Prices
 
         public ICollection<VendorPrice> VendorPrices { get; set; }
 
-        public ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

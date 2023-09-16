@@ -21,7 +21,7 @@ namespace Domain.Vendors
         public string PickupAddress { get; set; }
         public bool IsTrailDone { get; set;}
 
-        public ICollection<VendorPrice> VendorPrices { get; set; }
-        public ICollection<Order> Orders { get; set; }
+        public virtual ICollection<VendorPrice> VendorPrices { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }
