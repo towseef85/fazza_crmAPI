@@ -13,6 +13,7 @@ namespace Infrastructure.Dtos.VendorPriceDto
         public Guid Id { get; set; }
         public Guid VendorId { get; set; }
         public Guid PriceId { get; set; }
+        public Guid? CreatedUserId { get; set; }
 
     }
 }

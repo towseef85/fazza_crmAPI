@@ -14,5 +14,6 @@ namespace Infrastructure.Dtos.DriverDto
         public string MobileNo { get; set; }
         public string WorkType { get; set; }
         public string Status { get; set; }
+        public Guid? CreatedUserId { get; set; }
     }
 }

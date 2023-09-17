@@ -11,7 +11,7 @@ namespace Domain.Vendors
 {
     public class Vendor:BaseEntity
     {
-        public string StoreName { get; set; }
+        public string StoreName { get; set; }  
         public string OwnerName { get; set; }
         public string MobileNo { get; set; }
         public string? OfficeNumber { get; set; }

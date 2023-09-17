@@ -1,11 +1,13 @@
 ﻿
 using Application.VendorPricesBL;
 using Infrastructure.Dtos.VendorPriceDto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CRM.API.Controllers
 {
+    [Authorize(Roles = "Admin,Manager")]
     [Route("api/[controller]")]
     [ApiController]
     public class VendorPriceController : BaseApiController

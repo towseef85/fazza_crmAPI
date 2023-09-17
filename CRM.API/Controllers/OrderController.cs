@@ -1,11 +1,13 @@
 ﻿using Application.OrderBL;
 using Infrastructure.Dtos.DriverDto;
 using Infrastructure.Dtos.OrderDto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CRM.API.Controllers
 {
+    [Authorize(Roles = "Admin,Manager")]
     [Route("api/[controller]")]
     [ApiController]
     public class OrderController : BaseApiController

@@ -1,11 +1,13 @@
 ﻿
 using Application.VendorBL;
 using Infrastructure.Dtos.VendorDto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CRM.API.Controllers
 {
+    [Authorize(Roles = "Admin,Manager,User")]
     [Route("api/[controller]")]
     [ApiController]
     public class VendorController : BaseApiController

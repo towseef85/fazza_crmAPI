@@ -2,15 +2,19 @@
 using Application.Driver;
 using Application.DriverBL;
 using Infrastructure.Dtos.DriverDto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CRM.API.Controllers
 {
+    [Authorize(Roles = "Admin,Manager,User")]
+
     [Route("api/[controller]")]
     [ApiController]
     public class DriverController : BaseApiController
     {
+ 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetDriverDto))]
         public async Task<IActionResult> GetList()

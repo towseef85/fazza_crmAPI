@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using Domain.AppUsers;
 using Domain.Drivers;
 using Domain.Orders;
 using Domain.Prices;
 using Domain.Vendors;
+using Infrastructure.Dtos.AppUserDto;
 using Infrastructure.Dtos.DriverDto;
 using Infrastructure.Dtos.OrderDto;
 using Infrastructure.Dtos.PriceDto;
@@ -20,6 +22,9 @@ namespace Infrastructure.Providers
     {
         public MappingProfiles()
         {
+            CreateMap<PostAppUserDto, AppUser>();
+            CreateMap<AppUser, GetAppUserDto>();
+
             CreateMap<PostOrderDto, Order>();
             CreateMap<Order, GetOrderDto>();
 

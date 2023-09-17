@@ -10,7 +10,7 @@ namespace Domain.Common
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public DateTime? CreatedDate { get; set; }
-        //public virtual string CreatedBy { get; set; }
+        public Guid? CreatedUserId { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public DateTime? DeleteDate { get; set; }
         //public virtual string UpdatedBy { get; set; }

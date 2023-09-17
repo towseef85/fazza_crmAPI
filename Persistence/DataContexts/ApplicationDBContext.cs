@@ -7,6 +7,7 @@ using Domain.Drivers;
 using Domain.Vendors;
 using Domain.Prices;
 using Domain.Orders;
+using Domain.AppUsers;
 
 namespace Persistence.DataContexts
 {
@@ -15,6 +16,7 @@ namespace Persistence.DataContexts
 
         private IDbContextTransaction _currentTransaction;
 
+        public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Driver> Drivers { get; set; }
         public DbSet<Vendor> Vendors { get; set; }
@@ -26,7 +28,6 @@ namespace Persistence.DataContexts
 
         }
  
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.EnableDetailedErrors();
@@ -75,10 +76,10 @@ namespace Persistence.DataContexts
                 .HasOne(vp => vp.Prices)
                 .WithMany(p => p.VendorPrices)
                 .HasForeignKey(vp => vp.PriceId);
-//-----------
+            //-----------
 
             modelBuilder.Entity<Order>()
-          .HasKey(x => new { x.VendorId, x.PriceId,x.DriverId });
+          .HasKey(x => new { x.VendorId, x.PriceId });
 
             modelBuilder.Entity<Order>()
                 .HasOne(x => x.Vendors)

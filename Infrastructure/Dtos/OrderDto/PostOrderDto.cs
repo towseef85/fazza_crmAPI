@@ -20,5 +20,6 @@ namespace Infrastructure.Dtos.OrderDto
         public DateTime? RecevingDate { get; set; }
         public string? TypePayment { get; set; }
         public string? Remarks { get; set; }
+        public Guid? CreatedUserId { get; set; }
     }
 }

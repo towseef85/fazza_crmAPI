@@ -2,11 +2,13 @@
 using Domain.Prices;
 using Infrastructure.Dtos.DriverDto;
 using Infrastructure.Dtos.PriceDto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CRM.API.Controllers
 {
+    [Authorize(Roles = "Admin,Manager")]
     [Route("api/[controller]")]
     [ApiController]
     public class PriceController : BaseApiController

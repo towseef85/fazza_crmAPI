@@ -13,6 +13,7 @@ namespace Infrastructure.Dtos.PriceDto
         public decimal KM { get; set; }
         public decimal Prices { get; set; }
         public bool IsActive { get; set; }
+        public Guid? CreatedUserId { get; set; }
 
     }
 }

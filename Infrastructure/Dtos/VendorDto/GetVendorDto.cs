@@ -18,5 +18,6 @@ namespace Infrastructure.Dtos.VendorDto
         public string? LocationUrl { get; set; }
         public string LeadSource { get; set; }
         public string PickupAddress { get; set; }
+        public Guid? CreatedUserId { get; set; }
     }
 }
