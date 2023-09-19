@@ -2,9 +2,11 @@
 using Domain.AppUsers;
 using Infrastructure.Dtos.AppUserDto;
 using Infrastructure.Dtos.DriverDto;
+using Infrastructure.Dtos.UserDto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace CRM.API.Controllers
 {
@@ -12,7 +14,8 @@ namespace CRM.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class AppUserController : BaseApiController
-    { 
+    {
+
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetDriverDto))]

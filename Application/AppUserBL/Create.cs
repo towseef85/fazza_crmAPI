@@ -5,6 +5,7 @@ using Infrastructure.Dtos.AppUserDto;
 using Infrastructure.Dtos.DriverDto;
 using Infrastructure.Providers;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Persistence.DataContexts;
 using System;
 using System.Collections.Generic;
@@ -33,18 +34,23 @@ namespace Application.AppUserBL
         {
             private readonly ApplicationDbContext _context;
             private readonly IMapper _mapper;
+            private readonly IHttpContextAccessor _httpContextAccessor;
 
-            public Handler(ApplicationDbContext context, IMapper mapper)
+            public Handler(ApplicationDbContext context, IMapper mapper,IHttpContextAccessor httpContextAccessor)
             {
                 _context = context;
                 _mapper = mapper;
+                _httpContextAccessor = httpContextAccessor;
 
             }
             public async Task<ServiceStatus<PostAppUserDto>> Handle(Command request, CancellationToken cancellationToken)
             {
                 try
                 {
+
                     request.AppUser.Id = Guid.NewGuid();
+                    request.AppUser.CreatedUserId = request.AppUser.Id;
+
                     _context.AppUsers.Add(_mapper.Map<Domain.AppUsers.AppUser>(request.AppUser));
                     var result = await _context.SaveChangesAsync(cancellationToken) > 0;
                     return new ServiceStatus<PostAppUserDto>

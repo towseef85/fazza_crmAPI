@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Dtos.AppUserDto
+namespace Infrastructure.Dtos.UserDto
 {
     public class GetAppUserDto
     {

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Infrastructure.Dtos.AppUserDto;
 using Infrastructure.Dtos.DriverDto;
+using Infrastructure.Dtos.UserDto;
 using Infrastructure.Providers;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

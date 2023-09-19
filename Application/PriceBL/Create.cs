@@ -5,10 +5,12 @@ using Infrastructure.Dtos.PriceDto;
 using Infrastructure.Dtos.PriceDto;
 using Infrastructure.Providers;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Persistence.DataContexts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,18 +35,21 @@ namespace Application.PriceBL
         {
             private readonly ApplicationDbContext _context;
             private readonly IMapper _mapper;
+            private readonly IHttpContextAccessor _httpContextAccessor;
 
-            public Handler(ApplicationDbContext context, IMapper mapper)
+            public Handler(ApplicationDbContext context, IMapper mapper, IHttpContextAccessor httpContextAccessor)
             {
                 _context = context;
                 _mapper = mapper;
-
+                _httpContextAccessor = httpContextAccessor;
             }
             public async Task<ServiceStatus<PostPriceDto>> Handle(Command request, CancellationToken cancellationToken)
             {
                 try
                 {
+                    request.Price.CreatedUserId = new Guid(_httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier));
                     request.Price.Id = Guid.NewGuid();
+
                     _context.Prices.Add(_mapper.Map<Domain.Prices.Price>(request.Price));
                     var result = await _context.SaveChangesAsync(cancellationToken) > 0;
                     return new ServiceStatus<PostPriceDto>

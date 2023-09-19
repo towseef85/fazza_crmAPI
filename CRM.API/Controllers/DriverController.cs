@@ -2,9 +2,11 @@
 using Application.Driver;
 using Application.DriverBL;
 using Infrastructure.Dtos.DriverDto;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace CRM.API.Controllers
 {
@@ -14,7 +16,6 @@ namespace CRM.API.Controllers
     [ApiController]
     public class DriverController : BaseApiController
     {
- 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetDriverDto))]
         public async Task<IActionResult> GetList()
@@ -25,6 +26,7 @@ namespace CRM.API.Controllers
         [HttpGet("{Id}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetDriverDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Details(Guid Id)
         {
             return HandleResult(await Mediator.Send(new Details.Query { Id = Id }));

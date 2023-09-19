@@ -6,8 +6,10 @@ using Domain.Prices;
 using Domain.Vendors;
 using Infrastructure.Dtos.AppUserDto;
 using Infrastructure.Dtos.DriverDto;
+using Infrastructure.Dtos.LoginDto;
 using Infrastructure.Dtos.OrderDto;
 using Infrastructure.Dtos.PriceDto;
+using Infrastructure.Dtos.UserDto;
 using Infrastructure.Dtos.VendorDto;
 using Infrastructure.Dtos.VendorPriceDto;
 using System;
@@ -22,6 +24,8 @@ namespace Infrastructure.Providers
     {
         public MappingProfiles()
         {
+            CreateMap<AppUser, LoggedInUserDto>();
+
             CreateMap<PostAppUserDto, AppUser>();
             CreateMap<AppUser, GetAppUserDto>();
 

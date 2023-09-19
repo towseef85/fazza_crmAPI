@@ -5,10 +5,12 @@ using Infrastructure.Dtos.DriverDto;
 using Infrastructure.Dtos.OrderDto;
 using Infrastructure.Providers;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Persistence.DataContexts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,18 +35,22 @@ namespace Application.OrderBL
         {
             private readonly ApplicationDbContext _context;
             private readonly IMapper _mapper;
+            private readonly IHttpContextAccessor _httpContextAccessor;
 
-            public Handler(ApplicationDbContext context, IMapper mapper)
+
+            public Handler(ApplicationDbContext context, IMapper mapper,IHttpContextAccessor httpContextAccessor)
             {
                 _context = context;
                 _mapper = mapper;
-
+                _httpContextAccessor = httpContextAccessor;
             }
             public async Task<ServiceStatus<PostOrderDto>> Handle(Command request, CancellationToken cancellationToken)
             {
                 try
                 {
+                    request.Order.CreatedUserId = new Guid(_httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier));
                     request.Order.Id = Guid.NewGuid();
+
                     _context.Orders.Add(_mapper.Map<Domain.Orders.Order>(request.Order));
                     var result = await _context.SaveChangesAsync(cancellationToken) > 0;
                     return new ServiceStatus<PostOrderDto>

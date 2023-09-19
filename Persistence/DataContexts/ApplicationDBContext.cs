@@ -8,6 +8,7 @@ using Domain.Vendors;
 using Domain.Prices;
 using Domain.Orders;
 using Domain.AppUsers;
+using System.Security.Claims;
 
 namespace Persistence.DataContexts
 {
@@ -43,10 +44,12 @@ namespace Persistence.DataContexts
         private void AddAuditInfo()
         {
             var timestamp = DateTime.UtcNow;
-
+           // var CreatedUserId = new Guid(_httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier));
+           
 
             foreach (var entry in ChangeTracker.Entries().Where(x => x.Entity is BaseEntity && (x.State == EntityState.Added || x.State == EntityState.Modified)))
             {
+               // ((BaseEntity)entry.Entity).Id=Guid.NewGuid();
 
                 if (entry.State == EntityState.Added)
                 {
