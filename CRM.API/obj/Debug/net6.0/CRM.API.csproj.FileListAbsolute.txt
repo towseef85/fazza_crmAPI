@@ -191,3 +191,4 @@ D:\Fazza CRM\fazza_crmAPI\CRM.API\obj\Debug\net6.0\refint\CRM.API.dll
 D:\Fazza CRM\fazza_crmAPI\CRM.API\obj\Debug\net6.0\CRM.API.pdb
 D:\Fazza CRM\fazza_crmAPI\CRM.API\obj\Debug\net6.0\CRM.API.genruntimeconfig.cache
 D:\Fazza CRM\fazza_crmAPI\CRM.API\obj\Debug\net6.0\ref\CRM.API.dll
+D:\Fazza CRM\fazza_crmAPI\CRM.API\obj\Debug\net6.0\CRM.API.MvcApplicationPartsAssemblyInfo.cs

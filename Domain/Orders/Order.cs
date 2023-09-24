@@ -17,13 +17,15 @@ namespace Domain.Orders
         public Guid PriceId { get; set; }
         public string? COD { get; set; }
         public string? CODStatus { get; set; }
-         public Guid DriverId { get; set; }
+        public Guid DriverId { get; set; }
         public DateTime? RecevingDate { get; set; }
-        public string? TypePayment { get; set; }
+        public string? PaymentType { get; set; }
         public string? Remarks { get; set; }
-
+        public string? OrderPaymentStatus { get; set; }
         public virtual Vendor Vendors { get; set; }
         public virtual Driver Drivers { get; set; }
         public virtual Price Prices { get; set; }
+        public DriverPayment DriverPayment { get; set; }
+
     }
 }

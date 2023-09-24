@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CRM.API.Controllers
 {
-    [Authorize(Roles = "Admin,Manager,User")]
+   // [Authorize(Roles = "Admin,Manager,User")]
     [Route("api/[controller]")]
     [ApiController]
     public class VendorController : BaseApiController

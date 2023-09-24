@@ -45,6 +45,7 @@ namespace Application.LoginBL
         {
             private readonly ApplicationDbContext _context;
             private IConfiguration _config;
+
             public Handler(ApplicationDbContext context, IMapper mapper, IConfiguration config)
             {
                 _context = context;
@@ -52,7 +53,6 @@ namespace Application.LoginBL
             }
             public async Task<string> Handle(Command request, CancellationToken cancellationToken)
             {
-
                 var user = await _context.AppUsers.FirstOrDefaultAsync(x => x.Email == request.Login.EmailId && x.Password == request.Login.Password);
                 if (user != null)
                 {

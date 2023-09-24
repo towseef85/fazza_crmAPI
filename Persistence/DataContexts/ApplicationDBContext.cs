@@ -17,6 +17,8 @@ namespace Persistence.DataContexts
 
         private IDbContextTransaction _currentTransaction;
 
+
+        public DbSet<DriverPayment> DriverPayments { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Driver> Drivers { get; set; }
@@ -28,7 +30,7 @@ namespace Persistence.DataContexts
         {
 
         }
- 
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.EnableDetailedErrors();
@@ -44,12 +46,12 @@ namespace Persistence.DataContexts
         private void AddAuditInfo()
         {
             var timestamp = DateTime.UtcNow;
-           // var CreatedUserId = new Guid(_httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier));
-           
+            // var CreatedUserId = new Guid(_httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier));
+
 
             foreach (var entry in ChangeTracker.Entries().Where(x => x.Entity is BaseEntity && (x.State == EntityState.Added || x.State == EntityState.Modified)))
             {
-               // ((BaseEntity)entry.Entity).Id=Guid.NewGuid();
+                // ((BaseEntity)entry.Entity).Id=Guid.NewGuid();
 
                 if (entry.State == EntityState.Added)
                 {
@@ -82,7 +84,8 @@ namespace Persistence.DataContexts
             //-----------
 
             modelBuilder.Entity<Order>()
-          .HasKey(x => new { x.VendorId, x.PriceId });
+          .HasKey(x => x.Id);
+
 
             modelBuilder.Entity<Order>()
                 .HasOne(x => x.Vendors)
@@ -98,6 +101,24 @@ namespace Persistence.DataContexts
               .HasOne(x => x.Drivers)
               .WithMany(x => x.Orders)
               .HasForeignKey(x => x.DriverId);
+
+            //driver Payment
+
+            modelBuilder.Entity<DriverPayment>()
+            .HasKey(x => x.Id);
+
+            modelBuilder.Entity<DriverPayment>()
+                .HasOne(x => x.Driver)
+                .WithMany(x => x.DriverPayments)
+                .HasForeignKey(x => x.DriverId);
+
+            modelBuilder.Entity<DriverPayment>()
+     .HasOne(x => x.Order)
+     .WithOne(x => x.DriverPayment)
+     .HasForeignKey<DriverPayment>(x => x.OrderId)
+     .OnDelete(DeleteBehavior.Restrict);
+
+
 
             base.OnModelCreating(modelBuilder);
         }

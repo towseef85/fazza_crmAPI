@@ -10,7 +10,7 @@ using System.Security.Claims;
 
 namespace CRM.API.Controllers
 {
-    [Authorize(Roles = "Admin,Manager,User")]
+   // [Authorize(Roles = "Admin,Manager,User")]
 
     [Route("api/[controller]")]
     [ApiController]

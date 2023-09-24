@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class _2nd : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -99,15 +99,16 @@ namespace Persistence.Migrations
                 name: "Orders",
                 columns: table => new
                 {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     VendorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PriceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     COD = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CODStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DriverId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RecevingDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    TypePayment = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PaymentType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Remarks = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OrderPaymentStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -116,7 +117,7 @@ namespace Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Orders", x => new { x.VendorId, x.PriceId });
+                    table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Orders_Drivers_DriverId",
                         column: x => x.DriverId,
@@ -167,6 +168,53 @@ namespace Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "DriverPayments",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DriverId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PaidAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Balance = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PaymentType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PaymentStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Remarks = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Deleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DriverPayments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DriverPayments_Drivers_DriverId",
+                        column: x => x.DriverId,
+                        principalTable: "Drivers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DriverPayments_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DriverPayments_DriverId",
+                table: "DriverPayments",
+                column: "DriverId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DriverPayments_OrderId",
+                table: "DriverPayments",
+                column: "OrderId",
+                unique: true);
+
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_DriverId",
                 table: "Orders",
@@ -176,6 +224,11 @@ namespace Persistence.Migrations
                 name: "IX_Orders_PriceId",
                 table: "Orders",
                 column: "PriceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_VendorId",
+                table: "Orders",
+                column: "VendorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_VendorPrices_PriceId",
@@ -189,10 +242,13 @@ namespace Persistence.Migrations
                 name: "AppUsers");
 
             migrationBuilder.DropTable(
-                name: "Orders");
+                name: "DriverPayments");
 
             migrationBuilder.DropTable(
                 name: "VendorPrices");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Drivers");

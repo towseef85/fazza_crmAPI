@@ -12,8 +12,8 @@ using Persistence.DataContexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230917045452_2nd")]
-    partial class _2nd
+    [Migration("20230924093705_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -116,12 +116,65 @@ namespace Persistence.Migrations
                     b.ToTable("Drivers");
                 });
 
-            modelBuilder.Entity("Domain.Orders.Order", b =>
+            modelBuilder.Entity("Domain.Drivers.DriverPayment", b =>
                 {
-                    b.Property<Guid>("VendorId")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("PriceId")
+                    b.Property<decimal>("Balance")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("CreatedUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeleteDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("DriverId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("PaidAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("PaymentStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Remarks")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DriverId");
+
+                    b.HasIndex("OrderId")
+                        .IsUnique();
+
+                    b.ToTable("DriverPayments");
+                });
+
+            modelBuilder.Entity("Domain.Orders.Order", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("COD")
@@ -145,7 +198,13 @@ namespace Persistence.Migrations
                     b.Property<Guid>("DriverId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Id")
+                    b.Property<string>("OrderPaymentStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("PriceId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("RecevingDate")
@@ -154,17 +213,19 @@ namespace Persistence.Migrations
                     b.Property<string>("Remarks")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TypePayment")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("VendorId", "PriceId");
+                    b.Property<Guid>("VendorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("DriverId");
 
                     b.HasIndex("PriceId");
+
+                    b.HasIndex("VendorId");
 
                     b.ToTable("Orders");
                 });
@@ -296,6 +357,25 @@ namespace Persistence.Migrations
                     b.ToTable("VendorPrices");
                 });
 
+            modelBuilder.Entity("Domain.Drivers.DriverPayment", b =>
+                {
+                    b.HasOne("Domain.Drivers.Driver", "Driver")
+                        .WithMany("DriverPayments")
+                        .HasForeignKey("DriverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Orders.Order", "Order")
+                        .WithOne("DriverPayment")
+                        .HasForeignKey("Domain.Drivers.DriverPayment", "OrderId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Driver");
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("Domain.Orders.Order", b =>
                 {
                     b.HasOne("Domain.Drivers.Driver", "Drivers")
@@ -344,7 +424,15 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Drivers.Driver", b =>
                 {
+                    b.Navigation("DriverPayments");
+
                     b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("Domain.Orders.Order", b =>
+                {
+                    b.Navigation("DriverPayment")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Prices.Price", b =>

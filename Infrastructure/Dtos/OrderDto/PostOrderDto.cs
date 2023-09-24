@@ -18,7 +18,8 @@ namespace Infrastructure.Dtos.OrderDto
         public string? CODStatus { get; set; }
         public Guid DriverId { get; set; }
         public DateTime? RecevingDate { get; set; }
-        public string? TypePayment { get; set; }
+        public string? PaymentType { get; set; }
+        public string? OrderPaymentStatus { get; set; }       
         public string? Remarks { get; set; }
         public Guid? CreatedUserId { get; set; }
     }

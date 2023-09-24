@@ -20,7 +20,7 @@ namespace Application.OrderBL
             RuleFor(x => x.COD).NotEmpty();
             RuleFor(x => x.CODStatus).NotEmpty();
             RuleFor(x => x.DriverId).NotEmpty();
-            RuleFor(x => x.TypePayment).NotEmpty();
+            RuleFor(x => x.PaymentType).NotEmpty();
 
         }
     }

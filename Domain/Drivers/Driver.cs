@@ -17,5 +17,8 @@ namespace Domain.Drivers
         public string Status { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }
+
+        public virtual ICollection<DriverPayment> DriverPayments { get; set; }
+
     }
 }
